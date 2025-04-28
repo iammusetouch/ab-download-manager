@@ -16,7 +16,9 @@ plugins {
     id(Plugins.aboutLibraries)
     id("ir.amirab.installer-plugin")
 //    id(MyPlugins.proguardDesktop)
+    id("edu.sc.seis.macAppBundle") version "2.5.1"
 }
+
 dependencies {
     implementation(libs.decompose)
     implementation(libs.decompose.jbCompose)
@@ -388,4 +390,14 @@ fun TargetFormat.toInstallerTargetFormat(): InstallerTargetFormat {
         Exe -> InstallerTargetFormat.Exe
         Msi -> InstallerTargetFormat.Msi
     }
+}
+
+macAppBundle {
+    mainClassName = "your.main.ClassKt"  // Укажите ваш главный класс
+    appName = "ABDownloadManager"
+    icon = "path/to/icon.icns"          // Путь к иконке .icns
+    javaProperties.put("apple.laf.useScreenMenuBar", "true")
+    bundleIdentifier = "com.yourcompany.abdownloadmanager"
+    dmgName = "ABDownloadManager-${project.version}"
+    backgroundImage = "path/to/background.png" // Фоновое изображение для DMG
 }
